@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matrix Bridge</title>
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<header>
+  <h1>Matrix Bridge</h1>
+  <div id="conn" class="pill pill--muted">connecting…</div>
+</header>
+
+<main>
+  <section class="card" id="status-card">
+    <h2>Status</h2>
+    <dl id="status-list"><dd class="muted">Loading…</dd></dl>
+    <p id="status-error" class="error" hidden></p>
+  </section>
+
+  <section class="card">
+    <details id="settings-details">
+      <summary>
+        <h2>Settings</h2>
+        <span class="muted" id="settings-summary">Everything is configured here</span>
+      </summary>
+
+      <p class="muted">
+        The bridge is set up on this page. The add-on's own Configuration tab is
+        empty on purpose — saving here validates the settings, stores them and
+        reconnects without restarting the add-on.
+      </p>
+
+      <form id="settings-form" autocomplete="off">
+        <p class="muted">Loading…</p>
+      </form>
+
+      <div class="actions actions--save">
+        <button id="settings-save" class="primary" type="button">Save &amp; reconnect</button>
+        <label class="inline">
+          <input type="checkbox" id="reveal-secrets"> Show password and token
+        </label>
+        <span id="settings-note" class="muted"></span>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" id="verify-card">
+    <h2>Verification</h2>
+    <p class="muted" id="verify-empty">
+      No verification in progress. Start one from your Matrix client, or from the
+      Devices list below.
+    </p>
+    <div id="verify-list"></div>
+  </section>
+
+  <section class="card">
+    <h2>Rooms <span class="count" id="room-count"></span></h2>
+    <div id="room-list" class="muted">Loading…</div>
+  </section>
+
+  <section class="card">
+    <h2>Devices <span class="count" id="device-count"></span></h2>
+    <div id="device-list" class="muted">Loading…</div>
+  </section>
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="static/app.js"></script>
+</body>
+</html>

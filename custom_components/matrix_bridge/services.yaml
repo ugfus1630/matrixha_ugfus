@@ -1,0 +1,149 @@
+send_message:
+  fields:
+    room:
+      required: true
+      example: "#alerts:example.org"
+      selector:
+        text:
+    message:
+      required: true
+      example: The front door was opened.
+      selector:
+        text:
+          multiline: true
+    html:
+      example: "<b>The front door</b> was opened."
+      selector:
+        text:
+          multiline: true
+    reply_to:
+      example: "$abc123"
+      selector:
+        text:
+    thread_root:
+      example: "$abc123"
+      selector:
+        text:
+
+send_image:
+  fields:
+    room:
+      required: true
+      example: "#alerts:example.org"
+      selector:
+        text:
+    path:
+      example: /media/snapshot.jpg
+      selector:
+        text:
+    url:
+      example: https://example.org/snapshot.jpg
+      selector:
+        text:
+    caption:
+      example: Front door camera
+      selector:
+        text:
+
+send_file:
+  fields:
+    room:
+      required: true
+      example: "#alerts:example.org"
+      selector:
+        text:
+    path:
+      example: /share/report.pdf
+      selector:
+        text:
+    url:
+      example: https://example.org/report.pdf
+      selector:
+        text:
+    caption:
+      example: Monthly report
+      selector:
+        text:
+
+react:
+  fields:
+    room:
+      required: true
+      example: "#alerts:example.org"
+      selector:
+        text:
+    event_id:
+      required: true
+      example: "$abc123"
+      selector:
+        text:
+    key:
+      required: true
+      example: "👍"
+      selector:
+        text:
+
+join_room:
+  fields:
+    room:
+      required: true
+      example: "#alerts:example.org"
+      selector:
+        text:
+
+leave_room:
+  fields:
+    room:
+      required: true
+      example: "#alerts:example.org"
+      selector:
+        text:
+
+start_verification:
+  fields:
+    user_id:
+      required: true
+      example: "@alice:example.org"
+      selector:
+        text:
+    device_id:
+      example: ABCDEFGHIJ
+      selector:
+        text:
+
+confirm_verification:
+  fields:
+    transaction_id:
+      required: true
+      example: "abcd-1234"
+      selector:
+        text:
+
+cancel_verification:
+  fields:
+    transaction_id:
+      required: true
+      example: "abcd-1234"
+      selector:
+        text:
+
+set_device_trust:
+  fields:
+    user_id:
+      required: true
+      example: "@alice:example.org"
+      selector:
+        text:
+    device_id:
+      required: true
+      example: ABCDEFGHIJ
+      selector:
+        text:
+    state:
+      required: true
+      selector:
+        select:
+          options:
+            - verify
+            - unverify
+            - blacklist

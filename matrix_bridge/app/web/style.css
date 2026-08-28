@@ -1,0 +1,218 @@
+/* Deliberately theme-aware so the panel sits naturally inside Home Assistant
+   in both light and dark mode. */
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --fg: #22252a;
+  --muted: #6b7280;
+  --line: #e3e5e9;
+  --accent: #03a9f4;
+  --accent-fg: #ffffff;
+  --ok: #178a4a;
+  --warn: #b45309;
+  --err: #c02626;
+  --chip: #eef0f3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111417;
+    --card: #1c2024;
+    --fg: #e8eaed;
+    --muted: #9aa2ad;
+    --line: #2c3238;
+    --accent: #03a9f4;
+    --accent-fg: #06232f;
+    --ok: #4ade80;
+    --warn: #fbbf24;
+    --err: #f87171;
+    --chip: #262c32;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 0 3rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+h1 { font-size: 1.15rem; margin: 0; }
+h2 { font-size: 0.95rem; margin: 0 0 0.85rem; text-transform: uppercase;
+     letter-spacing: 0.06em; color: var(--muted); }
+
+main {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+}
+
+.count { color: var(--muted); font-weight: 400; }
+
+dl { display: grid; grid-template-columns: minmax(9rem, auto) 1fr;
+     gap: 0.4rem 1rem; margin: 0; }
+dt { color: var(--muted); }
+dd { margin: 0; word-break: break-word; }
+
+.pill {
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.pill--ok { background: var(--ok); color: #fff; }
+.pill--err { background: var(--err); color: #fff; }
+.pill--muted { background: var(--chip); color: var(--muted); }
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.row:last-child { border-bottom: 0; }
+.row__main { min-width: 12rem; flex: 1; }
+.row__title { font-weight: 600; }
+.row__sub { color: var(--muted); font-size: 0.85rem; word-break: break-all; }
+
+.tags { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-top: 0.3rem; }
+.tag {
+  background: var(--chip);
+  color: var(--muted);
+  border-radius: 5px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.75rem;
+}
+.tag--warn { color: var(--warn); }
+.tag--ok { color: var(--ok); }
+
+button {
+  font: inherit;
+  border: 1px solid var(--line);
+  background: var(--chip);
+  color: var(--fg);
+  border-radius: 7px;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+button.primary { background: var(--accent); color: var(--accent-fg); border-color: transparent; }
+button.danger { color: var(--err); }
+button:disabled { opacity: 0.5; cursor: default; }
+
+.actions { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+.verify {
+  border: 1px solid var(--accent);
+  border-radius: 9px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+.emoji {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 0.9rem 0;
+}
+.emoji figure { margin: 0; text-align: center; min-width: 4.2rem; }
+.emoji .glyph { font-size: 1.9rem; line-height: 1.2; }
+.emoji figcaption { font-size: 0.72rem; color: var(--muted); }
+
+.muted { color: var(--muted); }
+.error { color: var(--err); }
+.hint { color: var(--muted); font-size: 0.82rem; margin: 0.15rem 0 0; }
+
+/* ------------------------------------------------------------- settings */
+
+summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  cursor: pointer;
+  list-style-position: outside;
+}
+summary h2 { margin: 0; }
+summary span { font-size: 0.82rem; }
+details[open] > summary { margin-bottom: 0.85rem; }
+
+fieldset {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 0.9rem 1rem 1.1rem;
+  margin: 0 0 1rem;
+}
+legend { color: var(--muted); font-size: 0.8rem; text-transform: uppercase;
+         letter-spacing: 0.06em; padding: 0 0.35rem; }
+fieldset > .hint { margin-bottom: 0.9rem; }
+
+.field { margin-top: 0.9rem; }
+.field:first-of-type { margin-top: 0.2rem; }
+.field label { display: block; font-size: 0.85rem; margin-bottom: 0.25rem; }
+
+input[type="text"], input[type="password"], input[type="number"], select, textarea {
+  font: inherit;
+  width: 100%;
+  max-width: 34rem;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 0.4rem 0.55rem;
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); border-color: transparent; }
+textarea { resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+input[type="number"] { max-width: 10rem; }
+
+/* Checkboxes read as one line: box, then label. */
+.field--bool { display: flex; align-items: center; gap: 0.5rem; }
+.field--bool label { margin: 0; font-size: 0.9rem; }
+.field--bool .hint { flex-basis: 100%; }
+
+.inline { display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem;
+          color: var(--muted); }
+.actions--save { align-items: center; gap: 0.9rem; margin-top: 0.5rem; }
+
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%) translateY(2rem);
+  background: var(--fg);
+  color: var(--bg);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  max-width: 90vw;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }

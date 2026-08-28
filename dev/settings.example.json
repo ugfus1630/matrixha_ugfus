@@ -1,0 +1,44 @@
+{
+  "homeserver": "https://matrix.org",
+  "user_id": "@homeassistant:matrix.org",
+  "password": "change-me",
+  "access_token": "",
+  "device_name": "Home Assistant (dev)",
+  "presence": "online",
+  "autojoin": {
+    "enabled": true,
+    "allowed_users": [],
+    "allowed_domains": [],
+    "max_rooms": 50,
+    "accept_dm_invites": true,
+    "leave_if_alone": false
+  },
+  "e2ee": {
+    "enabled": true,
+    "send_to_unverified_rooms": true,
+    "ignore_unverified_devices": true,
+    "blacklist_unverified": false,
+    "auto_trust_own_devices": true,
+    "auto_accept_verification": false,
+    "require_verified_sender": false,
+    "verification_timeout": 300
+  },
+  "media": {
+    "download_incoming": true,
+    "download_path": "/tmp/matrix-bridge-dev/media",
+    "max_download_mb": 25,
+    "max_upload_mb": 50,
+    "allowed_upload_paths": ["/tmp"],
+    "retention_days": 30
+  },
+  "homeassistant": {
+    "create_notify_entities": true,
+    "fire_events": true
+  },
+  "advanced": {
+    "log_level": "debug",
+    "ignore_own_messages": true,
+    "sync_timeout": 30000,
+    "message_history_limit": 50
+  }
+}

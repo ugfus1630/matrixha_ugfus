@@ -1,0 +1,138 @@
+{
+  "config": {
+    "step": {
+      "addon_confirm": {
+        "title": "Matrix Bridge add-on found",
+        "description": "The {addon} add-on was found at {host}. Its settings will be read directly from the add-on, so there is nothing to enter here.\n\nAll configuration lives in the add-on's Configuration tab."
+      },
+      "manual": {
+        "title": "Connect to the Matrix Bridge add-on",
+        "description": "Enter the add-on's address and API token. You will see this when Home Assistant is not running supervised, when the add-on is on another machine, or when the add-on is running but Supervisor is not serving its API token — in which case the address below is already filled in and only the token is needed.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "token": "API token"
+        },
+        "data_description": {
+          "host": "The add-on hostname. For a locally installed add-on this is local-matrix-bridge.",
+          "token": "Shown in the Matrix panel under Settings \u2192 API token."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-enter the API token",
+        "description": "The Matrix Bridge add-on rejected the stored token. Enter the current one from the Matrix panel, under Settings \u2192 API token.",
+        "data": {
+          "token": "API token"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach the add-on. Check that it is running and that the host and port are correct.",
+      "invalid_auth": "The add-on rejected this API token."
+    },
+    "abort": {
+      "already_configured": "This Matrix account is already set up.",
+      "addon_not_running": "The Matrix Bridge add-on is installed but not running. Start it, then try again.",
+      "reauth_failed": "Could not re-read the add-on's details from Supervisor. Check that the add-on is running."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "rooms": { "name": "Rooms" },
+      "unverified_devices": { "name": "Unverified devices" },
+      "pending_verifications": { "name": "Pending verifications" },
+      "last_message": { "name": "Last message" }
+    },
+    "binary_sensor": {
+      "connected": { "name": "Connected" },
+      "unverified_devices_present": { "name": "Unverified devices present" }
+    }
+  },
+  "services": {
+    "send_message": {
+      "name": "Send message",
+      "description": "Sends a text message to a Matrix room.",
+      "fields": {
+        "room": { "name": "Room", "description": "Room ID, alias or name." },
+        "message": { "name": "Message", "description": "The plain text body." },
+        "html": { "name": "HTML", "description": "Optional HTML-formatted body." },
+        "reply_to": { "name": "Reply to", "description": "Event ID to reply to." },
+        "thread_root": { "name": "Thread root", "description": "Event ID starting the thread." }
+      }
+    },
+    "send_image": {
+      "name": "Send image",
+      "description": "Sends a picture to a Matrix room, encrypting it when the room is encrypted.",
+      "fields": {
+        "room": { "name": "Room", "description": "Room ID, alias or name." },
+        "path": { "name": "Path", "description": "Local file path, which must be inside the add-on's allowed upload paths." },
+        "url": { "name": "URL", "description": "URL to fetch the image from instead of a local path." },
+        "caption": { "name": "Caption", "description": "Optional message sent after the image." }
+      }
+    },
+    "send_file": {
+      "name": "Send file",
+      "description": "Sends any file to a Matrix room.",
+      "fields": {
+        "room": { "name": "Room", "description": "Room ID, alias or name." },
+        "path": { "name": "Path", "description": "Local file path, which must be inside the add-on's allowed upload paths." },
+        "url": { "name": "URL", "description": "URL to fetch the file from instead of a local path." },
+        "caption": { "name": "Caption", "description": "Optional message sent after the file." }
+      }
+    },
+    "react": {
+      "name": "React",
+      "description": "Adds an emoji reaction to a message.",
+      "fields": {
+        "room": { "name": "Room", "description": "Room ID, alias or name." },
+        "event_id": { "name": "Event ID", "description": "The message to react to." },
+        "key": { "name": "Reaction", "description": "The emoji to react with." }
+      }
+    },
+    "join_room": {
+      "name": "Join room",
+      "description": "Joins a Matrix room.",
+      "fields": {
+        "room": { "name": "Room", "description": "Room ID or alias to join." }
+      }
+    },
+    "leave_room": {
+      "name": "Leave room",
+      "description": "Leaves a Matrix room.",
+      "fields": {
+        "room": { "name": "Room", "description": "Room ID, alias or name." }
+      }
+    },
+    "start_verification": {
+      "name": "Start verification",
+      "description": "Starts emoji verification with another device.",
+      "fields": {
+        "user_id": { "name": "User ID", "description": "The Matrix user whose device to verify." },
+        "device_id": { "name": "Device ID", "description": "Optional when the user has exactly one unverified device." }
+      }
+    },
+    "confirm_verification": {
+      "name": "Confirm verification",
+      "description": "Confirms that the emoji match on both devices.",
+      "fields": {
+        "transaction_id": { "name": "Transaction ID", "description": "From the verification event or notification." }
+      }
+    },
+    "cancel_verification": {
+      "name": "Cancel verification",
+      "description": "Cancels a verification, signalling that the emoji did not match.",
+      "fields": {
+        "transaction_id": { "name": "Transaction ID", "description": "From the verification event or notification." }
+      }
+    },
+    "set_device_trust": {
+      "name": "Set device trust",
+      "description": "Directly marks a device as verified, unverified or blacklisted without the emoji exchange.",
+      "fields": {
+        "user_id": { "name": "User ID", "description": "Owner of the device." },
+        "device_id": { "name": "Device ID", "description": "The device to change." },
+        "state": { "name": "State", "description": "The trust state to apply." }
+      }
+    }
+  }
+}

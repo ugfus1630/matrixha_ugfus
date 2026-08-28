@@ -1,0 +1,50 @@
+---
+name: Matrix Bridge
+version: "0.3.5"
+slug: matrix_bridge
+description: >-
+  End-to-end encrypted Matrix bot for Home Assistant. Auto-joins rooms,
+  discovers them, sends and receives messages and pictures, and performs
+  interactive emoji device verification.
+url: https://github.com/immakinbacon/matrixha
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: application
+boot: auto
+hassio_api: true
+hassio_role: default
+homeassistant_api: false
+
+# The Ingress panel provides the interactive surfaces that do not fit in the
+# options form: live emoji verification, device trust management and room
+# browsing.
+ingress: true
+ingress_port: 8099
+panel_icon: mdi:matrix
+panel_title: Matrix
+panel_admin: true
+
+# Left unpublished by default: Home Assistant reaches the add-on over the
+# internal Docker network at `local-matrix-bridge:8099`. Users who want to
+# reach the API from outside can map a host port here.
+ports:
+  8099/tcp: null
+ports_description:
+  8099/tcp: Matrix Bridge API (optional; not required by the integration)
+
+map:
+  - media:rw
+  - share:rw
+  - homeassistant_config:ro
+
+# There is deliberately nothing to configure here. Every setting lives in the
+# Matrix panel (Settings), where it can be validated against the homeserver and
+# applied without restarting the add-on, and is stored in /data/settings.json.
+#
+# `api_token` is the sole exception, and is not something to fill in: the add-on
+# generates it and writes it here itself, because Supervisor serves an add-on's
+# options to Home Assistant and that is how the integration finds the bridge.
+schema:
+  api_token: password?
