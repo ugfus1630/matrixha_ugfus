@@ -6,7 +6,7 @@ description: >-
   End-to-end encrypted Matrix bot for Home Assistant. Auto-joins rooms,
   discovers them, sends and receives messages and pictures, and performs
   interactive emoji device verification.
-url: https://github.com/immakinbacon/matrixha
+url: https://github.com/ugfus1630/matrixha_ugfus
 arch:
   - amd64
   - aarch64
