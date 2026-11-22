@@ -32,6 +32,8 @@ from nio import (
     WhoamiError,
 )
 
+from nio.api import Api
+from nio.responses import JoinResponse
 from . import events
 from .events import EventBus
 from .media import MediaError, MediaManager
@@ -381,7 +383,8 @@ class MatrixBot:
             return
 
         _LOGGER.info("Joining %s (invited by %s)", room.room_id, event.sender)
-        response = await self.client.join(room.room_id)
+        method, path = Api.join(self.client.access_token, room.room_id)
+        response = await self.client._send(JoinResponse, method, path, data="{}")
         if isinstance(response, JoinError):
             _LOGGER.error("Failed to join %s: %s", room.room_id, response.message)
             return
@@ -650,7 +653,8 @@ class MatrixBot:
         return {"event_id": response.event_id, "room_id": room.room_id}
 
     async def join_room(self, room_id: str) -> dict[str, Any]:
-        response = await self.client.join(room_id)
+        method, path = Api.join(self.client.access_token, room_id)
+        response = await self.client._send(JoinResponse, method, path, data="{}")
         if isinstance(response, JoinError):
             raise BotError(f"Could not join {room_id}: {response.message}")
         self.bus.publish(events.ROOMS_CHANGED, {"joined": response.room_id})
