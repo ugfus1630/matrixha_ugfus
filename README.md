@@ -1,3 +1,4 @@
+#FIX auto accept join requests to rooms
 # Matrix Bridge for Home Assistant
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-FFDD00?style=flat-square&logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/immakinbacon)
